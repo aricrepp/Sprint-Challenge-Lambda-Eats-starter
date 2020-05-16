@@ -1,0 +1,45 @@
+.modalButton {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  padding: 5px;
+  color: white;
+  background: #333;
+  border: 1px solid #111;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.modalButton:hover {
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40px;
+  background-color: #555;
+  color: white;
+  margin: 20px 0 20px 0;
+}
+
+select,
+textarea {
+  margin: 0 20px 0 20px;
+}
+
+.submit {
+  margin-top: 25px;
+  height: 50px;
+}
+
+textarea {
+  height: 100px;
+}
