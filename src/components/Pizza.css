@@ -14,3 +14,22 @@
 .modalButton:hover {
   cursor: pointer;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40px;
+  background-color: #555;
+  color: white;
+  margin: 20px 0 20px 0;
+}
+
+.submit {
+  background-color: tomato;
+}

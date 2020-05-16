@@ -1,37 +1,45 @@
 import React, {useState,useEffect} from "react";
 import * as yup from 'yup';
 import axios from 'axios';
+import {RadioGroup, Radio} from 'react-radio-group';
 import Modal from "react-modal";
 import "./Pizza.css";
 
 const Pizza = props => {
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("Name is a required field"),
-        email: yup
-          .string()
-          .email("Must be a valid email address")
-          .test('email-taken', 'Email is taken', value => value !== "waffle@syrup.com")
-          .required("Must include email address"),
-        password: yup.string()
-          // .when('$user', (user, passSchema) => user ? passSchema : passSchema.min(6, 'minimal password length is 6 characters'))
-          // .when('$user', (user, passSchema) => user ? passSchema : passSchema.max(15, 'maximum password length is 15 characters')
-          .matches(
+        size: yup.string().required("Must choose a size"),
+        sauces: yup.string().required("Must choose a sauce"),
+        toppings: yup.string().required("Must Choose at least 1 topping"),
+        instructions: yup.string()
+        // email: yup
+        //   .string()
+        //   .email("Must be a valid email address")
+        //   .test('email-taken', 'Email is taken', value => value !== "waffle@syrup.com")
+        //   .required("Must include email address"),
+        // password: yup.string()
+        //   // .when('$user', (user, passSchema) => user ? passSchema : passSchema.min(6, 'minimal password length is 6 characters'))
+        //   // .when('$user', (user, passSchema) => user ? passSchema : passSchema.max(15, 'maximum password length is 15 characters')
+        //   .matches(
     
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-            `Must Contain 8 Characters One Uppercase, One Lowercase, One Number and One Special Case Character`,
-          )
-          .required(),
-        role: yup.string().required("Must choose a role"),
-        terms: yup.boolean().oneOf([true], "Please agree to terms of use")
+        //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        //     `Must Contain 8 Characters One Uppercase, One Lowercase, One Number and One Special Case Character`,
+        //   )
+        //   .required(),
+        
+        // terms: yup.boolean().oneOf([true], "Please agree to terms of use")
       });
 
     const [formState, setFormState] = useState({
-        name: "",
-        email: "",
-        password: "",
-        role: "",
-        terms: false
+        // name: "",
+        // email: "",
+        // password: "",
+        // size: "",
+        // terms: false
+        size: "",
+        sauces: "",
+        toppings: [],
+        instructions: ""
       });
     
       // BONUS!: state for whether our button should be disabled or not.
@@ -48,11 +56,10 @@ const Pizza = props => {
       
     
       const [errorState, setErrorState] = useState({
-        name: "",
-        email: "",
-        password: "",
-        role: "",
-        terms: ""
+        size: "",
+        sauces: "",
+        toppings: [],
+        instructions: ""
       });
     
       const validate = e => {
@@ -77,8 +84,9 @@ const Pizza = props => {
     
       // onChange function
       const inputChange = e => {
+        console.log("input changed!", e.target.value, e.target.checked);
         e.persist();
-        // console.log("input changed!", e.target.value, e.target.checked);
+        
         validate(e);
         let value =
           e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -93,10 +101,10 @@ const Pizza = props => {
           .then(response => {
               setUser([...user, response.data]);
               setFormState({
-                  name: "",
-                  email: "",
-                  password: "",
-                  terms: false
+                size: "",
+                sauces: "",
+                toppings: [],
+                instructions: ""
                 });
           })
           .catch(err => console.log(err));
@@ -109,14 +117,16 @@ const Pizza = props => {
           right                 : 'auto',
           bottom                : 'auto',
           marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)'
+          transform             : 'translate(-50%, -50%)',
+          background            : '#bbb',
+          padding               : '0'
         }
       };
 
 
     return(
 
-        <div>
+        <div >
         
         <Modal
           isOpen={props.modalIsOpen}
@@ -130,79 +140,31 @@ const Pizza = props => {
           <h2 >Build Your Own Pizza</h2>
   
           <form onSubmit={formSubmit}>
-            <label htmlFor="name">
-            Name
-            <input
-                type="text"
-                name="name"
-                id="name"
-                value={formState.name}
-                onChange={inputChange}
-            />
-            </label>
-            <label htmlFor="email">
-            Email
-            <input
-                type="email"
-                name="email"
-                id="email"
-                value={formState.email}
-                onChange={inputChange}
-            />
-            {errorState.email.length > 0 ? (
-                <p className="error">{errorState.email}</p>
-            ) : null}
-            </label>
-            <label htmlFor="password">
-            Password
-            <input
-                className="password"
-                name="password"
-                id="password"
-                type='password'
-                value={formState.password}
-                onChange={inputChange}
-            /> 
-            {errorState.password.length > 0 ? (
-                <p className="error">{errorState.password}</p>
-            ) : null}
-            </label>
-            <label htmlFor="roles">
-                What is your role?
-                <select
-                value={formState.role}
-                name="role"
-                id="roles"
+          <label htmlFor="sizes">Choice of Size</label>
+            <select
+                value={formState.size}
+                name="size"
+                id="sizes"
                 onChange={inputChange}
                 >
                 <option value="Blank"></option>
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Admin">Admin</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
                 </select>
-                {errorState.role.length > 0 ? (
-                <p className="error">{errorState.role}</p>
+                {errorState.size.length > 0 ? (
+                <p className="error">{errorState.size}</p>
                 ) : null}
-            </label>
-            <div>
-            <label htmlFor="terms" className='terms'>
-            <input
-            className='checkbox'
-                type="checkbox"
-                id="terms"
-                name="terms"
-                checked={formState.terms}
-                onChange={inputChange}
-            />
-            Terms & Conditions
+            <label htmlFor="sauces"> Name</label>
+            <RadioGroup name="sauces" value={formState.sauces} onChange={inputChange}>
+                <Radio value="Marinara" />Marinara
+                <Radio value="Pesto" />Pesto
+                <Radio value="BBQ" />BBQ
+            </RadioGroup>
+           
             
-            </label>
-            {errorState.terms.length > 0 ? (
-                <p className="error">{errorState.terms}</p>
-            ) : null}
-            </div>
+            <button disabled={buttonDisabled}>Add to Order</button>
             
-            <button disabled={buttonDisabled}>Submit</button>
             
         </form>
           
