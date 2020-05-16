@@ -25,7 +25,7 @@ const Header = props => {
         <div className="headerImg">
            <div className="headerContent"> 
                 <h2>Your favorite food, delivered while coding</h2>
-                <button onClick={openModal} className="pizzaButton"><p>Pizza?</p></button>
+                <button onClick={openModal} id="pizza" className="pizzaButton"><p>Pizza?</p></button>
                 <Pizza closeModal={closeModal} afterOpenModal={afterOpenModal} openModal={openModal} modalIsOpen={modalIsOpen}/>
             </div> 
         </div>
