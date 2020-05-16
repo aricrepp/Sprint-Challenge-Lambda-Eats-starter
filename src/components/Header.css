@@ -37,13 +37,11 @@ h2 {
   font-size: 1.4rem;
 }
 
+.pizzaButton:hover {
+  cursor: pointer;
+}
+
 P {
   padding: none;
   margin: 0;
-}
-a {
-  text-decoration: none;
-}
-a:hover {
-  opacity: 0.9;
 }

@@ -11,7 +11,10 @@ const Nav = props => {
                 <Link className="navButton" tp={'/'}>
                     <div ><p>Home</p></div>
                 </Link>
-                <div className="navButton"><p>Help</p></div>
+                <Link className="navButton">
+                    <div ><p>Help</p></div>
+                </Link>
+                
             </div>
         </nav>
     );
