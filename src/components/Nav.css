@@ -1,0 +1,38 @@
+nav {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 60px;
+  background-color: rgb(112, 106, 106);
+}
+
+h1 {
+  margin-left: 50px;
+  color: white;
+  text-shadow: 0 0 10px #333;
+}
+
+.navButtonCon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 15%;
+  height: inherit;
+  margin-right: 50px;
+}
+
+.navButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: inherit;
+  color: white;
+  background-color: tomato;
+  border-right: 2px solid salmon;
+  border-left: 2px solid salmon;
+}

@@ -1,0 +1,49 @@
+.headerImg {
+  background-image: url("../Assets/Pizza.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  border-bottom: 0.5rem solid #333;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+}
+
+h2 {
+  color: white;
+  text-shadow: 0 0 10px #000;
+  font-size: 3rem;
+}
+
+.pizzaButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 50px;
+  background-color: tomato;
+  color: white;
+  text-shadow: 0 0 5px #000;
+  border: 3px salmon solid;
+  border-radius: 10px;
+  font-size: 1.4rem;
+}
+
+P {
+  padding: none;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  opacity: 0.9;
+}
