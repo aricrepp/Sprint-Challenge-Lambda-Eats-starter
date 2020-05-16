@@ -30,6 +30,16 @@ label {
   margin: 20px 0 20px 0;
 }
 
+select,
+textarea {
+  margin: 0 20px 0 20px;
+}
+
 .submit {
-  background-color: tomato;
+  margin-top: 25px;
+  height: 50px;
+}
+
+textarea {
+  height: 100px;
 }

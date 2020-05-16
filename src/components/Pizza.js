@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import * as yup from 'yup';
 import axios from 'axios';
-import {RadioGroup, Radio} from 'react-radio-group';
+import OrderSubmit from "./OrderSubmit.js";
 import Modal from "react-modal";
 import "./Pizza.css";
 
@@ -9,8 +9,7 @@ const Pizza = props => {
 
     const formSchema = yup.object().shape({
         size: yup.string().required("Must choose a size"),
-        sauces: yup.string().required("Must choose a sauce"),
-        toppings: yup.string().required("Must Choose at least 1 topping"),
+        sauce: yup.string().required("Must choose a sauce"),
         instructions: yup.string()
         // email: yup
         //   .string()
@@ -37,8 +36,7 @@ const Pizza = props => {
         // size: "",
         // terms: false
         size: "",
-        sauces: "",
-        toppings: [],
+        sauce: "",
         instructions: ""
       });
     
@@ -57,8 +55,7 @@ const Pizza = props => {
     
       const [errorState, setErrorState] = useState({
         size: "",
-        sauces: "",
-        toppings: [],
+        sauce: "",
         instructions: ""
       });
     
@@ -102,8 +99,7 @@ const Pizza = props => {
               setUser([...user, response.data]);
               setFormState({
                 size: "",
-                sauces: "",
-                toppings: [],
+                sauce: "",
                 instructions: ""
                 });
           })
@@ -155,19 +151,45 @@ const Pizza = props => {
                 {errorState.size.length > 0 ? (
                 <p className="error">{errorState.size}</p>
                 ) : null}
-            <label htmlFor="sauces"> Name</label>
-            <RadioGroup name="sauces" value={formState.sauces} onChange={inputChange}>
-                <Radio value="Marinara" />Marinara
-                <Radio value="Pesto" />Pesto
-                <Radio value="BBQ" />BBQ
-            </RadioGroup>
-           
+            <label htmlFor="sauces"> Sauces</label>
+            <select
+                value={formState.sauce}
+                name="sauce"
+                id="sauces"
+                onChange={inputChange}
+                >
+                <option value="Blank"></option>
+                <option value="Marinara">Marinara</option>
+                <option value="Pesto">Pesto</option>
+                <option value="BBQ">BBQ</option>
+                </select>
+                {errorState.sauce.length > 0 ? (
+                <p className="error">{errorState.sauce}</p>
+                ) : null}
             
-            <button disabled={buttonDisabled}>Add to Order</button>
+            <label htmlFor="extra">
+            Anything Else?
+            
+            {errorState.instructions.length > 0 ? (
+                <p className="error">{errorState.instructions}</p>
+            ) : null}
+            </label>
+            <textarea
+                className="instructions"
+                name="instructions"
+                id="extra"
+                type='instructions'
+                value={formState.instructions}
+                onChange={inputChange}
+            /> 
+
+            <button className="submit" disabled={buttonDisabled}>Add to Order</button>
             
             
         </form>
           
+
+        <OrderSubmit user={user} />
         </Modal>
       </div>
         
